@@ -1,0 +1,39 @@
+<div class="container" style="padding-top:100px;">
+	<div class="row">
+		<div class="col-md-12">
+			<form action="" method="POST" accept-charset="utf-8">
+				<div class="form-group">
+					<label>输入一段包含成语的中文</label>
+					<textarea class="form-control" rows="4" name="sentence">{% if raw %}{{ raw }}{% endif %}</textarea>
+				</div>
+				<button type="submit" class="btn btn-success">提交</button>
+			</form>
+		</div>
+		<div class="col-md-12" style="padding-top:50px;">
+			<div class="form-group">
+				<label>分词结果</label>
+				<textarea class="form-control" rows="4">{% if res %}{{ res }}{% endif %}</textarea>
+			</div>
+		</div>
+		<div class="col-md-12" style="padding-top:50px;">
+		{% if cylist%}
+			{% for windows in cylist %}
+				{% for w in windows[0] %}
+					<button type="button" class="btn btn-primary">{{ w }}</button>
+				{% endfor %}
+				{% for w in windows[1] %}
+					<button type="button" class="btn btn-success">{{ w }}</button>
+				{% endfor %}
+				{% for w in windows[2] %}
+					<button type="button" class="btn btn-primary">{{ w }}</button>
+					<br>
+				{% endfor %}
+				{% for t in windows[3] %}
+					<button type="button" class="btn btn-primary">{{ t[0] }}</button>
+					<button type="button" class="btn btn-primary">{{ t[1] }}</button>
+				{% endfor %}
+			{% endfor %}
+		{% endif %}
+		</div>
+	</div>
+</div>
