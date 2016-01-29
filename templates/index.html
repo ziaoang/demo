@@ -12,23 +12,24 @@
 		<div class="col-md-12" style="padding-top:50px;">
 			<div class="form-group">
 				<label>分词结果</label>
-				<textarea class="form-control" rows="4">{% if res %}{{ res }}{% endif %}</textarea>
+				<textarea class="form-control" rows="4">{% if seg %}{{ seg }}{% endif %}</textarea>
 			</div>
 		</div>
 		<div class="col-md-12" style="padding-top:50px;">
-		{% if cylist%}
-			{% for windows in cylist %}
-				{% for w in windows[0] %}
+		{% if contexts %}
+			{% for context in contexts %}
+				<hr>
+				{% for w in context[0] %}
 					<button type="button" class="btn btn-primary">{{ w }}</button>
 				{% endfor %}
-				{% for w in windows[1] %}
+				{% for w in context[1] %}
 					<button type="button" class="btn btn-success">{{ w }}</button>
 				{% endfor %}
-				{% for w in windows[2] %}
+				{% for w in context[2] %}
 					<button type="button" class="btn btn-primary">{{ w }}</button>
-					<br>
 				{% endfor %}
-				{% for t in windows[3] %}
+				<hr>
+				{% for t in context[3] %}
 					<button type="button" class="btn btn-primary">{{ t[0] }}</button>
 					<button type="button" class="btn btn-primary">{{ t[1] }}</button>
 				{% endfor %}
