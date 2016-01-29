@@ -4,13 +4,19 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-#import gensim
 import jieba
 jieba.load_userdict("/var/www/demo/static/files/userdict.txt")
 
 def load_model(filename):
-	return None
-	#return gensim.models.Word2Vec.load(filename)
+	mat = {}
+	for line in open(filename):
+		t = line.strip().split("\t")
+		mat[t[0]] = []
+		for i in range(1, len(t)):
+			mat[t[0]].append(float(t[i]))
+	return mat
+
+model = load_model("/var/www/demo/static/files/mat.txt")
 
 def load_cy_dict(filename):
 	cy_dict = {}
@@ -43,7 +49,7 @@ def inner_product(a, b):
 		res += a[i] * b[i]
 	return res
 
-def rank(neighbor, model, cy_dict):
+def rank(neighbor, cy_dict):
 	context = []
 	for w in neighbor:
 		if w not in model:
@@ -72,15 +78,14 @@ def segment(paragraph):
 
 def run(paragraph):
 	window_size = 5
-	cy_dict = load_cy_dict("static/files/all_statistic.txt")
-	model = load_model("static/files/all_vector_small_sg.txt")
+	cy_dict = load_cy_dict("/var/www/demo/static/files/all_statistic.txt")
 
 	res = []
 	paragraph_seg = segment(paragraph)
 	contexts = loadContext(paragraph_seg, cy_dict, window_size)
 	for context in contexts:
 		neighbor = context[0] + context[2]
-		rank_list = rank(neighbor, model, cy_dict)
+		rank_list = rank(neighbor, cy_dict)
 		context.append(rank_list[:5])
 		res.append(context)
 	return res

@@ -20,18 +20,18 @@
 			{% for context in contexts %}
 				<hr>
 				{% for w in context[0] %}
-					<button type="button" class="btn btn-primary">{{ w }}</button>
+					<button type="button" class="btn btn-default">{{ w }}</button>
 				{% endfor %}
 				{% for w in context[1] %}
 					<button type="button" class="btn btn-success">{{ w }}</button>
 				{% endfor %}
 				{% for w in context[2] %}
-					<button type="button" class="btn btn-primary">{{ w }}</button>
+					<button type="button" class="btn btn-default">{{ w }}</button>
 				{% endfor %}
 				<hr>
 				{% for t in context[3] %}
 					<button type="button" class="btn btn-primary">{{ t[0] }}</button>
-					<button type="button" class="btn btn-primary">{{ t[1] }}</button>
+					<button type="button" class="btn btn-default">{{ t[1] }}</button><br>
 				{% endfor %}
 			{% endfor %}
 		{% endif %}
